@@ -37,13 +37,13 @@ jobs:
       - name: Create artifact
         shell: bash
         run: |
-          dotnet pushlish ./api -c Release -o ./api/bin/pushish
+          dotnet publish ./api -c Release -o ./api/bin/publish
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: apiapp
-          path: api/bin/pushlished
+          path: api/bin/published
 
   release:
     name: 'Release app'
