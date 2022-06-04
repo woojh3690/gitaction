@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - name: Say Hello World from ${{ matirx.os }}
+      - name: Say Hello World from ${{ matrix.os }}
         shell: bash
         run: |
           echo "Hello, from ${{ matrix.os }}"
