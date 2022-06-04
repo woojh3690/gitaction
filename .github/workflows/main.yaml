@@ -25,4 +25,4 @@ jobs:
       - name:
         shell: bash
         run: |
-          echo "secret: ${{ secret.HELLO }}"
+          echo "secret: ${{ secrets.HELLO }}"
