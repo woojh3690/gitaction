@@ -13,14 +13,14 @@ jobs:
     steps:
       - name: Set enviroment vriable 1
         shell: bash
-          run: |
-            echo "VAR1='This is the value from the step 1'" >> $GITHUB_ENV
+        run: |
+          echo "VAR1='This is the value from the step 1'" >> $GITHUB_ENV
 
       - name: Set enviroment vriable 2
         shell: pwsh
-          run: |
-            echo "VAR2='This is the value from the step 2'" | `
-              Out-File -FilePath $env:$GITHUB_ENV -Encoding UTF-8 -Append
+        run: |
+          echo "VAR2='This is the value from the step 2'" | `
+            Out-File -FilePath $env:$GITHUB_ENV -Encoding UTF-8 -Append
 
       - name: Check enviroment variables
         shell: bash
