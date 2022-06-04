@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Say Hello from first Job
-        sehll: bash
+        shell: bash
         run: |
           echo "Hello World"
 
@@ -20,6 +20,6 @@ jobs:
 
       steps:
         - name: Say Hello from second Job
-          sehll: bash
+          shell: bash
           run: |
             echo "Hello World 2"
