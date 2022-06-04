@@ -3,12 +3,12 @@ name: 'My First Github Actions'
 on:
   push:
     branches:
-      - main
+    - main
     tags:
-      - 'v*'
+    - 'v*'
   pull_request:
     branches:
-      - main: 
+    - main 
 
 jobs:
   first_job:
