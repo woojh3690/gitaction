@@ -11,7 +11,7 @@ on:
     - main 
 
 jobs:
-  first_job:
+  build:
     name: 'Build App'
     runs-on: ubuntu-latest
 
@@ -44,3 +44,32 @@ jobs:
         with:
           name: apiapp
           path: api/bin/pushlished
+
+  release:
+    name: 'Release app'
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifact
+        users: actions/download-artifact@v2
+        with:
+          name: apiapp
+          path: artifacts/api
+      
+      - name: Zip artifact
+        shell: bash
+        run: |
+          pushd artifacts/apiapp
+          zip -qq -r  apiapp.zip .
+          popd
+
+          mv artifacts/api/api.zip artifacts/apiapp.zip
+
+      - name: Release artifact to Github
+        uses: marvinpinto/action-automatic-releases@latest
+        with: 
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false
+          files: |
+            artifacts/apiapp.zip
