@@ -23,3 +23,14 @@ jobs:
           shell: bash
           run: |
             echo "Hello World 2"
+  
+  third_job:
+    name: 'third Job'
+    needs: first_job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Say Hello from third Job
+        shell: bash
+        run: |
+          echo "Hello World 3"
