@@ -25,4 +25,4 @@ jobs:
       - name:
         shell: bash
         run: |
-          echo "seret: ${{ secret.HELLO }}"
+          echo "secret: ${{ secret.HELLO }}"
