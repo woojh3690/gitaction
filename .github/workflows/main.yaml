@@ -5,24 +5,15 @@ on: push
 jobs:
   first_job:
     name: 'First Job'
-    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        os: ['windows-latest', 'macos-latest', 'ubuntu-latest']
+
+    runs-on: ${{ matrix.os }}
 
     steps:
-      - name: Mask output value
-        shell: bash
-        id: first
-        run: |
-          value1='This is super secret value'
-
-          echo "::add-mask::$value1"
-          echo "::set-output name=first_value::$value1"
-
-      - name: Check output value
+      - name: Say Hello World from ${{ matirx.os }}
         shell: bash
         run: |
-          echo "value: ${{ steps.first.outputs.first_value }}"
-
-      - name:
-        shell: bash
-        run: |
-          echo "secret: ${{ secrets.HELLO }}"
+          echo "Hello, from ${{ matrix.os }}"
