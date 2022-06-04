@@ -27,25 +27,25 @@ jobs:
           echo "node version: $(node --version)"
 
   second_job:
-  name: 'Second Job'
-  if: github.event_name == 'pull_request'
+    name: 'Second Job'
+    if: github.event_name == 'pull_request'
 
-  strategy:
-    matrix:
-      os: ['windows-latest', 'macos-latest', 'ubuntu-latest']
-      nodejs: [ '14.x', '16.x' ]
+    strategy:
+      matrix:
+        os: ['windows-latest', 'macos-latest', 'ubuntu-latest']
+        nodejs: [ '14.x', '16.x' ]
 
-  runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
 
-  steps:
-    - name: Choose node.js version
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.nodejs }}
+    steps:
+      - name: Choose node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.nodejs }}
 
-    - name: Say Hello World from ${{ matrix.os }}
-      shell: bash
-      run: |
-        echo "Hello, from ${{ matrix.os }}"
-        echo "node version: $(node --version)"
+      - name: Say Hello World from ${{ matrix.os }}
+        shell: bash
+        run: |
+          echo "Hello, from ${{ matrix.os }}"
+          echo "node version: $(node --version)"
     
