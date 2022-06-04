@@ -25,6 +25,12 @@ jobs:
         run: |
           echo "Hello, from ${{ matrix.os }}"
           echo "node version: $(node --version)"
+      
+      - name: Say Hello only from ubuntu
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          echo "Hello, from ${{ matrix.os }}"
+          echo "node version: $(node --version)"
 
   second_job:
     name: 'Second Job'
