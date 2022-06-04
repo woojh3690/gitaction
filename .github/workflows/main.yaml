@@ -1,38 +1,46 @@
 name: 'My First Github Actions'
 
-on: [ 'push', 'pull_request' ]
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main: 
 
 jobs:
   first_job:
-    name: 'First Job'
+    name: 'Build App'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Say Hello from first Job
+      - name: Checkout repo
+        users: actions/checkout@v2
+      
+      - name: Setu .NET SDK
+        users: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.x'
+      
+      - name: Restore NuGet packages
         shell: bash
         run: |
-          echo "Hello World"
-
-  second_job:
-      name: 'Second Job'
-      runs-on: ubuntu-latest
-
-      steps:
-        - name: Say Hello from second Job
-          shell: bash
-          run: |
-            echo "Hello World 2"
-  
-  third_job:
-    name: 'third Job'
-    needs:
-      - first_job
-      - second_job
-    
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Say Hello from third Job
+          dotnet restore ./api
+      
+      - name: Build App
         shell: bash
         run: |
-          echo "Hello World 3"
+          dotnet build ./api -c Release
+      
+      - name: Create artifact
+        shell: bash
+        run: |
+          dotnet pushlish ./api -c Release -o ./api/bin/pushish
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: apiapp
+          path: api/bin/pushlished
