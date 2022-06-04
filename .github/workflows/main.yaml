@@ -17,10 +17,10 @@ jobs:
 
     steps:
       - name: Checkout repo
-        users: actions/checkout@v2
+        uses: actions/checkout@v2
       
       - name: Setu .NET SDK
-        users: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.x'
       
@@ -52,7 +52,7 @@ jobs:
 
     steps:
       - name: Download artifact
-        users: actions/download-artifact@v2
+        uses: actions/download-artifact@v2
         with:
           name: apiapp
           path: artifacts/api
