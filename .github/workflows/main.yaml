@@ -10,9 +10,10 @@ jobs:
     steps:
       - name: Mask output value
         shell: bash
+        id: first
         run: |
           value1='This is super secret value'
-          
+
           echo "::add-mask::$value1"
           echo "::set-output name=first_value::$value1"
 
